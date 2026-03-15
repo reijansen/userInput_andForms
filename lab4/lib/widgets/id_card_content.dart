@@ -21,7 +21,7 @@ class IdCardContent extends StatelessWidget {
         // Keep real ID-like ratio, but enforce a minimum height on small widths
         // so the content does not overflow vertically.
         final double cardWidth = constraints.maxWidth;
-        final double cardHeight = max(cardWidth / 1.58, 360);
+        final double cardHeight = max(cardWidth / 1.58, 360.0);
 
         return SizedBox(
           height: cardHeight,

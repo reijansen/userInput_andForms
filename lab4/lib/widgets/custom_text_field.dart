@@ -26,11 +26,20 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
+      style: const TextStyle(
+        fontSize: 14.5,
+        color: Color(0xFF0F172A),
+        fontWeight: FontWeight.w500,
+      ),
       validator: validator,
       decoration: InputDecoration(
         labelText: labelText,
-        prefixIcon: Icon(icon),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 2),
+          child: Icon(icon, size: 20),
+        ),
         alignLabelWithHint: alignLabelWithHint,
+        prefixIconConstraints: const BoxConstraints(minWidth: 44, minHeight: 44),
       ),
     );
   }

@@ -22,9 +22,23 @@ class CustomDropdownField extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       value: value,
+      isExpanded: true,
+      icon: const Icon(
+        Icons.keyboard_arrow_down_rounded,
+        color: Color(0xFF64748B),
+      ),
+      style: const TextStyle(
+        fontSize: 14.5,
+        color: Color(0xFF0F172A),
+        fontWeight: FontWeight.w500,
+      ),
       decoration: InputDecoration(
         labelText: labelText,
-        prefixIcon: Icon(icon),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.only(left: 2),
+          child: Icon(icon, size: 20),
+        ),
+        prefixIconConstraints: const BoxConstraints(minWidth: 44, minHeight: 44),
       ),
       items: items
           .map(

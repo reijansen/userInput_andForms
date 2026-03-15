@@ -73,7 +73,7 @@ class _FormScreenState extends State<FormScreen> {
     return 'HI-$a-$b';
   }
 
-  // Builds one model object so the dialog receives all form data in one place.
+  // Build one model object so the dialog receives all form data in one place.
   UserFormData _buildUserData() {
     return UserFormData(
       name: _nameController.text.trim(),
@@ -120,139 +120,246 @@ class _FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('User Input and Forms'),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: const Color(0xFF0E7490),
-        foregroundColor: Colors.white,
-      ),
+      appBar: AppBar(title: const Text('User Input and Forms')),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFFE2F5F9),
-                borderRadius: BorderRadius.circular(18),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x1A000000),
-                    blurRadius: 16,
-                    offset: Offset(0, 8),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      const Color(0xFFE8F7FB),
+                      const Color(0xFFF4F8FB),
+                      const Color(0xFFF8FAFC),
+                    ],
                   ),
-                ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Laboratory Exercise: User Input and Forms',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF0F172A),
-                    ),
+            ),
+            Positioned(
+              top: -90,
+              right: -30,
+              child: Container(
+                width: 220,
+                height: 220,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [Color(0x5038BDF8), Color(0x0038BDF8)],
                   ),
-                  const SizedBox(height: 14),
-                  CustomTextField(
-                    controller: _nameController,
-                    labelText: 'Name *',
-                    icon: Icons.person_outline,
-                    validator: (String? value) =>
-                        _requiredFieldValidator(value, fieldName: 'Name'),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 560),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Expanded(
-                        child: CustomTextField(
-                          controller: _heightController,
-                          labelText: 'Height (cm) *',
-                          icon: Icons.height,
-                          keyboardType: TextInputType.number,
-                          validator: (String? value) =>
-                              _requiredFieldValidator(value, fieldName: 'Height'),
+                      Container(
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFF0E7490), Color(0xFF0EA5A8)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0x2A0E7490),
+                              blurRadius: 24,
+                              offset: Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Color(0x33FFFFFF),
+                                  child: Icon(
+                                    Icons.badge_rounded,
+                                    color: Colors.white,
+                                    size: 22,
+                                  ),
+                                ),
+                                SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    'ID Generator',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'Laboratory Exercise: User Input and Forms',
+                              style: TextStyle(
+                                color: Color(0xE6FFFFFF),
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: CustomTextField(
-                          controller: _weightController,
-                          labelText: 'Weight (kg) *',
-                          icon: Icons.monitor_weight_outlined,
-                          keyboardType: TextInputType.number,
-                          validator: (String? value) =>
-                              _requiredFieldValidator(value, fieldName: 'Weight'),
+                      const SizedBox(height: 16),
+                      Form(
+                        key: _formKey,
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.92),
+                            borderRadius: BorderRadius.circular(24),
+                            border: Border.all(
+                              color: const Color(0x1F0E7490),
+                              width: 1.1,
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x160F172A),
+                                blurRadius: 20,
+                                offset: Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Personal Information',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF0F172A),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              const Text(
+                                'Fill out the fields below to generate a sample Hawaii-style ID.',
+                                style: TextStyle(
+                                  color: Color(0xFF64748B),
+                                  fontSize: 13.2,
+                                ),
+                              ),
+                              const SizedBox(height: 18),
+                              CustomTextField(
+                                controller: _nameController,
+                                labelText: 'Name *',
+                                icon: Icons.person_outline,
+                                validator: (String? value) =>
+                                    _requiredFieldValidator(value, fieldName: 'Name'),
+                              ),
+                              const SizedBox(height: 14),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: CustomTextField(
+                                      controller: _heightController,
+                                      labelText: 'Height (cm) *',
+                                      icon: Icons.height,
+                                      keyboardType: TextInputType.number,
+                                      validator: (String? value) =>
+                                          _requiredFieldValidator(value, fieldName: 'Height'),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: CustomTextField(
+                                      controller: _weightController,
+                                      labelText: 'Weight (kg) *',
+                                      icon: Icons.monitor_weight_outlined,
+                                      keyboardType: TextInputType.number,
+                                      validator: (String? value) =>
+                                          _requiredFieldValidator(value, fieldName: 'Weight'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 14),
+                              CustomDropdownField(
+                                labelText: 'Hair Color *',
+                                icon: Icons.palette_outlined,
+                                items: _hairColors,
+                                value: _selectedHairColor,
+                                onChanged: (String? value) {
+                                  setState(() => _selectedHairColor = value);
+                                },
+                                validator: (String? value) =>
+                                    value == null ? 'Hair color is required' : null,
+                              ),
+                              const SizedBox(height: 14),
+                              CustomDropdownField(
+                                labelText: 'Eye Color *',
+                                icon: Icons.visibility_outlined,
+                                items: _eyeColors,
+                                value: _selectedEyeColor,
+                                onChanged: (String? value) {
+                                  setState(() => _selectedEyeColor = value);
+                                },
+                                validator: (String? value) =>
+                                    value == null ? 'Eye color is required' : null,
+                              ),
+                              const SizedBox(height: 14),
+                              CustomDropdownField(
+                                labelText: 'Sex *',
+                                icon: Icons.wc,
+                                items: _sexOptions,
+                                value: _selectedSex,
+                                onChanged: (String? value) {
+                                  setState(() => _selectedSex = value);
+                                },
+                                validator: (String? value) =>
+                                    value == null ? 'Sex is required' : null,
+                              ),
+                              const SizedBox(height: 14),
+                              CustomDropdownField(
+                                labelText: 'City *',
+                                icon: Icons.location_city_outlined,
+                                items: _cities,
+                                value: _selectedCity,
+                                onChanged: (String? value) {
+                                  if (value != null) {
+                                    setState(() => _selectedCity = value);
+                                  }
+                                },
+                              ),
+                              const SizedBox(height: 14),
+                              CustomTextField(
+                                controller: _addressController,
+                                labelText: 'Address *',
+                                icon: Icons.home_outlined,
+                                maxLines: 3,
+                                alignLabelWithHint: true,
+                                validator: (String? value) =>
+                                    _requiredFieldValidator(value, fieldName: 'Address'),
+                              ),
+                              const SizedBox(height: 20),
+                              GenerateIdButton(onPressed: _showIdDialog),
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 12),
-                  CustomDropdownField(
-                    labelText: 'Hair Color *',
-                    icon: Icons.palette_outlined,
-                    items: _hairColors,
-                    value: _selectedHairColor,
-                    onChanged: (String? value) {
-                      setState(() => _selectedHairColor = value);
-                    },
-                    validator: (String? value) =>
-                        value == null ? 'Hair color is required' : null,
-                  ),
-                  const SizedBox(height: 12),
-                  CustomDropdownField(
-                    labelText: 'Eye Color *',
-                    icon: Icons.visibility_outlined,
-                    items: _eyeColors,
-                    value: _selectedEyeColor,
-                    onChanged: (String? value) {
-                      setState(() => _selectedEyeColor = value);
-                    },
-                    validator: (String? value) =>
-                        value == null ? 'Eye color is required' : null,
-                  ),
-                  const SizedBox(height: 12),
-                  CustomDropdownField(
-                    labelText: 'Sex *',
-                    icon: Icons.wc,
-                    items: _sexOptions,
-                    value: _selectedSex,
-                    onChanged: (String? value) {
-                      setState(() => _selectedSex = value);
-                    },
-                    validator: (String? value) => value == null ? 'Sex is required' : null,
-                  ),
-                  const SizedBox(height: 12),
-                  CustomDropdownField(
-                    labelText: 'City *',
-                    icon: Icons.location_city_outlined,
-                    items: _cities,
-                    value: _selectedCity,
-                    onChanged: (String? value) {
-                      if (value != null) {
-                        setState(() => _selectedCity = value);
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 12),
-                  CustomTextField(
-                    controller: _addressController,
-                    labelText: 'Address *',
-                    icon: Icons.home_outlined,
-                    maxLines: 3,
-                    alignLabelWithHint: true,
-                    validator: (String? value) =>
-                        _requiredFieldValidator(value, fieldName: 'Address'),
-                  ),
-                  const SizedBox(height: 18),
-                  GenerateIdButton(onPressed: _showIdDialog),
-                ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

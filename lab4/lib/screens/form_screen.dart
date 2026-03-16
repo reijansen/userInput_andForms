@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lab4/models/user_form_data.dart';
 import 'package:lab4/widgets/custom_dropdown_field.dart';
 import 'package:lab4/widgets/custom_text_field.dart';
@@ -63,6 +64,17 @@ class _FormScreenState extends State<FormScreen> {
   String? _requiredFieldValidator(String? value, {required String fieldName}) {
     if (value == null || value.trim().isEmpty) {
       return '$fieldName is required';
+    }
+    return null;
+  }
+
+  String? _digitsOnlyValidator(String? value, {required String fieldName}) {
+    final String? requiredError = _requiredFieldValidator(value, fieldName: fieldName);
+    if (requiredError != null) {
+      return requiredError;
+    }
+    if (!RegExp(r'^\d+$').hasMatch(value!.trim())) {
+      return '$fieldName must contain digits only';
     }
     return null;
   }
@@ -273,8 +285,11 @@ class _FormScreenState extends State<FormScreen> {
                                       labelText: 'Height (cm) *',
                                       icon: Icons.height,
                                       keyboardType: TextInputType.number,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.digitsOnly,
+                                      ],
                                       validator: (String? value) =>
-                                          _requiredFieldValidator(value, fieldName: 'Height'),
+                                          _digitsOnlyValidator(value, fieldName: 'Height'),
                                     ),
                                   ),
                                   const SizedBox(width: 12),
@@ -284,8 +299,11 @@ class _FormScreenState extends State<FormScreen> {
                                       labelText: 'Weight (kg) *',
                                       icon: Icons.monitor_weight_outlined,
                                       keyboardType: TextInputType.number,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.digitsOnly,
+                                      ],
                                       validator: (String? value) =>
-                                          _requiredFieldValidator(value, fieldName: 'Weight'),
+                                          _digitsOnlyValidator(value, fieldName: 'Weight'),
                                     ),
                                   ),
                                 ],

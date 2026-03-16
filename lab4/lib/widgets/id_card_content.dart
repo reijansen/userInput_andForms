@@ -124,7 +124,7 @@ class IdCardContent extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'STATE OF HAWAII',
+                                  'STATE OF MILKY WAY',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700,
@@ -134,7 +134,7 @@ class IdCardContent extends StatelessWidget {
                                 ),
                                 SizedBox(height: 1),
                                 Text(
-                                  'HAWAII DRIVER LICENSE  -  SAMPLE ID',
+                                  'MILKY WAY DRIVER LICENSE - ID',
                                   style: TextStyle(
                                     color: Color(0xD6E2F1F8),
                                     fontSize: 10.8,

@@ -11,6 +11,8 @@ class IdCardContent extends StatelessWidget {
     required this.userData,
   });
 
+  static const String _fixedIdPhotoAsset = 'assets/images/id_photo.jpg';
+
   final String idNumber;
   final UserFormData userData;
 
@@ -174,18 +176,29 @@ class IdCardContent extends StatelessWidget {
                                   color: Colors.white.withOpacity(0.70),
                                   width: 1.2,
                                 ),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Color(0x280F172A),
-                                    blurRadius: 10,
-                                    offset: Offset(0, 4),
-                                  ),
-                                ],
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color(0x280F172A),
+                                blurRadius: 10,
+                                offset: Offset(0, 4),
                               ),
-                              child: const Icon(
-                                Icons.account_circle,
-                                size: 60,
-                                color: Colors.white,
+                            ],
+                          ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.8),
+                                child: Image.asset(
+                                  _fixedIdPhotoAsset,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Center(
+                                      child: Icon(
+                                        Icons.account_circle,
+                                        size: 60,
+                                        color: Colors.white,
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                             const SizedBox(width: 12),

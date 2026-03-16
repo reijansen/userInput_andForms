@@ -21,7 +21,10 @@ class _FormScreenState extends State<FormScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController(
+    text: 'Philippines',
+  );
 
   final List<String> _hairColors = <String>[
     'Black',
@@ -43,12 +46,9 @@ class _FormScreenState extends State<FormScreen> {
   ];
 
   final List<String> _sexOptions = <String>['Male', 'Female', 'Other'];
-  final List<String> _cities = <String>['Honolulu', 'Hilo', 'Kailua', 'Pearl City'];
-
   String? _selectedHairColor;
   String? _selectedEyeColor;
   String? _selectedSex;
-  String _selectedCity = 'Honolulu';
 
   final Random _random = Random();
 
@@ -57,7 +57,8 @@ class _FormScreenState extends State<FormScreen> {
     _nameController.dispose();
     _heightController.dispose();
     _weightController.dispose();
-    _addressController.dispose();
+    _cityController.dispose();
+    _countryController.dispose();
     super.dispose();
   }
 
@@ -94,8 +95,8 @@ class _FormScreenState extends State<FormScreen> {
       hairColor: _selectedHairColor ?? '',
       eyeColor: _selectedEyeColor ?? '',
       sex: _selectedSex ?? '',
-      city: _selectedCity,
-      address: _addressController.text.trim(),
+      city: _cityController.text.trim(),
+      address: _countryController.text.trim(),
     );
   }
 
@@ -345,26 +346,20 @@ class _FormScreenState extends State<FormScreen> {
                                     value == null ? 'Sex is required' : null,
                               ),
                               const SizedBox(height: 14),
-                              CustomDropdownField(
+                              CustomTextField(
+                                controller: _cityController,
                                 labelText: 'City *',
                                 icon: Icons.location_city_outlined,
-                                items: _cities,
-                                value: _selectedCity,
-                                onChanged: (String? value) {
-                                  if (value != null) {
-                                    setState(() => _selectedCity = value);
-                                  }
-                                },
+                                validator: (String? value) =>
+                                    _requiredFieldValidator(value, fieldName: 'City'),
                               ),
                               const SizedBox(height: 14),
                               CustomTextField(
-                                controller: _addressController,
-                                labelText: 'Address *',
-                                icon: Icons.home_outlined,
-                                maxLines: 3,
-                                alignLabelWithHint: true,
+                                controller: _countryController,
+                                labelText: 'Country *',
+                                icon: Icons.public,
                                 validator: (String? value) =>
-                                    _requiredFieldValidator(value, fieldName: 'Address'),
+                                    _requiredFieldValidator(value, fieldName: 'Country'),
                               ),
                               const SizedBox(height: 20),
                               GenerateIdButton(onPressed: _showIdDialog),

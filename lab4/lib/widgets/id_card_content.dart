@@ -267,7 +267,7 @@ class IdCardContent extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      _buildPair('ADDRESS', userData.address),
+                  _buildPair('COUNTRY', userData.address),
                       const SizedBox(height: 6),
                       Row(
                         children: [
@@ -281,7 +281,7 @@ class IdCardContent extends StatelessWidget {
                           ),
                           const Spacer(),
                           const Text(
-                            'Aloha Signature',
+                            'Milky Signature',
                             style: TextStyle(
                               color: Colors.white,
                               fontStyle: FontStyle.italic,
